@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auto Redeem Rescue Web Dashboard
+
+**Live Demo:** [https://auto-redeem.zeabur.app](https://auto-redeem.zeabur.app/)
+
+A streamlined rescue dashboard for ERC-4626 vaults. **Use only with temporary wallets and small funds!**
+
+## About This Project
+
+This project is a frontend adaptation inspired by Anton Cheng's excellent [auto-redeem rescue script (Node.js CLI)](https://github.com/antoncoding/auto-redeem).  
+It brings the same single-purpose rescue workflow to a purely browser-based, UI-driven interface, eliminating the need for shell access.
+
+### Reference Implementation
+
+- **Node script:** [https://github.com/antoncoding/auto-redeem](https://github.com/antoncoding/auto-redeem)
+- **Original author:** [Anton Cheng (@antoncoding)](https://github.com/antoncoding)
+- **Security warning:** Node version is recommended for advanced users, higher security, full operator control.
+
+## Security Warning
+
+⚠️ **Critical:**  
+This web dashboard exposes the rescue wallet private key in browser memory and application context.  
+If you are comfortable with command-line node scripts (or need to rescue significant assets), use Anton Cheng's original [auto-redeem CLI](https://github.com/antoncoding/auto-redeem) for maximum safety.
+
+## How It Works
+
+1. Generate a one-time wallet (use [vanity-eth.tk](https://vanity-eth.tk)), do NOT use your main wallet.
+2. Transfer ERC-4626 vault shares and a small amount of native gas to that wallet.
+3. Enter your main wallet address, the rescue private key, and vault/RPC info into the dashboard UI.
+4. Start rescue: the bot auto-redeems shares and sends all rescued assets to your main wallet.
+5. All status and network actions are shown in the UI and chain explorers.
 
 ## Getting Started
 
-First, run the development server:
+### Local Development / Build
+
+Clone repository, run:
 
 ```bash
+git clone https://github.com/gcake119/auto-redeem-frontend.git
+cd auto-redeem-frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## References
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [antoncoding/auto-redeem](https://github.com/antoncoding/auto-redeem)—Original CLI implementation
+- [ERC-4626 Vault Standard](https://erc4626.info/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License.
