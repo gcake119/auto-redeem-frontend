@@ -20,7 +20,6 @@ export default function WalletHint() {
       {/* 原操作步驟黃底區塊 */}
       <div className="bg-yellow-50 p-4 rounded-lg mb-4">
         <h3 className="font-semibold mb-2">🔐 操作步驟：建議使用臨時錢包私鑰進行</h3>
-        <p>
           <ol className="text-sm space-y-2 list-decimal pl-5">
             <li>到 <a href="https://vanity-eth.tk" target="_blank" className="underline">vanity-eth.tk</a> 產生新錢包</li>
             <li>把想贖回的資金池份額（Share Token）轉進新的臨時錢包</li>
@@ -29,7 +28,6 @@ export default function WalletHint() {
             <li>可透過鏈上瀏覽器查詢贖回與轉帳紀錄</li>
             <li>支援自訂鏈 RPC 與自訂 Vault 地址</li>
           </ol>
-        </p>
       </div>
     </div>
   );
