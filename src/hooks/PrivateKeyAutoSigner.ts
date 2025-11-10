@@ -53,85 +53,104 @@ import {
    * 3. 自動贖回 + 轉帳 (完整傳遞 temp wallet, main wallet, chain)
    * ===============================================================
    */
-  export async function autoRedeemAndTransfer({
-    tempPrivateKey,
-    tempAddress,
-    mainAddress,
-    vaultAddress,
-    rpcUrl,
-    chainOptions,
-    redeemAmount,
-  }: {
-    tempPrivateKey: `0x${string}`;
-    tempAddress: `0x${string}`;
-    mainAddress: `0x${string}`;
-    vaultAddress: `0x${string}`;
-    rpcUrl: string;
-    chainOptions?: {
-      chainId?: number;
-      name?: string;
-      network?: string;
-      nativeCurrency?: { name: string; symbol: string; decimals: number };
-    };
-    redeemAmount: bigint;
-  }): Promise<{ redeemHash: string; transferHash: string }> {
-    // ---- 產生 chain 物件 ----
-    const chain = getDynamicChain(rpcUrl, chainOptions);
+export async function autoRedeemAndTransfer({
+  tempPrivateKey,
+  tempAddress,
+  mainAddress,
+  vaultAddress,
+  rpcUrl,
+  chainOptions,
+  redeemAmount,
+}: {
+  tempPrivateKey: `0x${string}`;
+  tempAddress: `0x${string}`;
+  mainAddress: `0x${string}`;
+  vaultAddress: `0x${string}`;
+  rpcUrl: string;
+  chainOptions?: {
+    chainId?: number;
+    name?: string;
+    network?: string;
+    nativeCurrency?: { name: string; symbol: string; decimals: number };
+  };
+  redeemAmount: bigint;
+}): Promise<{ redeemHash: string; transferHash: string }> {
+  // ---- 產生 chain 物件 ----
+  const chain = getDynamicChain(rpcUrl, chainOptions);
+
+  // ---- 建 walletClient 和 publicClient ----
+  const account = privateKeyToAccount(tempPrivateKey);
+  const walletClient = createWalletClient({
+    account,
+    chain,
+    transport: http(rpcUrl),
+  });
   
-    // ---- 建 walletClient ----
-    const account = privateKeyToAccount(tempPrivateKey);
-    const walletClient = createWalletClient({
-      account,
-      chain,
-      transport: http(rpcUrl),
-    });
+  const publicClient = createPublicClient({
+    chain,
+    transport: http(rpcUrl),
+  });
+
+  // ---- 贖回 ----
+  const redeemHash = await walletClient.writeContract({
+    address: vaultAddress,
+    abi: [
+      {
+        name: 'redeem',
+        type: 'function',
+        stateMutability: 'nonpayable',
+        inputs: [
+          { name: 'shares', type: 'uint256' },
+          { name: 'receiver', type: 'address' },
+          { name: 'owner', type: 'address' },
+        ],
+        outputs: [{ type: 'uint256' }],
+      },
+    ] as const,
+    functionName: 'redeem',
+    args: [redeemAmount, tempAddress, tempAddress],
+  });
   
-    // ---- 贖回 ----
-    const redeemHash = await walletClient.writeContract({
-      address: vaultAddress,
-      abi: [
-        {
-          name: 'redeem',
-          type: 'function',
-          stateMutability: 'nonpayable',
-          inputs: [
-            { name: 'shares', type: 'uint256' },
-            { name: 'receiver', type: 'address' },
-            { name: 'owner', type: 'address' },
-          ],
-          outputs: [{ type: 'uint256' }],
-        },
-      ] as const,
-      functionName: 'redeem',
-      args: [redeemAmount, tempAddress, tempAddress],
-    });
+  // ---- 等待贖回交易確認 ----
+  console.log('等待贖回交易確認...');
+  await publicClient.waitForTransactionReceipt({ 
+    hash: redeemHash,
+    confirmations: 1 
+  });
+  console.log('贖回交易已確認');
+
+  // ---- 查資產 token 地址 ----
+  const assetTokenAddress = await getVaultAssetAddress(vaultAddress, rpcUrl, chainOptions);
+
+  // ---- 轉帳資產 ----
+  const transferHash = await walletClient.writeContract({
+    address: assetTokenAddress,
+    abi: [
+      {
+        name: 'transfer',
+        type: 'function',
+        stateMutability: 'nonpayable',
+        inputs: [
+          { name: 'to', type: 'address' },
+          { name: 'amount', type: 'uint256' },
+        ],
+        outputs: [{ type: 'bool' }],
+      },
+    ] as const,
+    functionName: 'transfer',
+    args: [mainAddress, redeemAmount],
+  });
   
-    // ---- 查資產 token 地址 ----
-    const assetTokenAddress = await getVaultAssetAddress(vaultAddress, rpcUrl, chainOptions);
-  
-    // ---- 轉帳資產 ----
-    const transferHash = await walletClient.writeContract({
-      address: assetTokenAddress,
-      abi: [
-        {
-          name: 'transfer',
-          type: 'function',
-          stateMutability: 'nonpayable',
-          inputs: [
-            { name: 'to', type: 'address' },
-            { name: 'amount', type: 'uint256' },
-          ],
-          outputs: [{ type: 'bool' }],
-        },
-      ] as const,
-      functionName: 'transfer',
-      args: [mainAddress, redeemAmount],
-    });
-  
-    return { redeemHash, transferHash };
-  }
-  
-  /* ===============================================
+  // ---- 等待轉帳交易確認 ----
+  console.log('等待轉帳交易確認...');
+  await publicClient.waitForTransactionReceipt({ 
+    hash: transferHash,
+    confirmations: 1 
+  });
+  console.log('轉帳交易已確認');
+
+  return { redeemHash, transferHash };
+}  /* ===============================================
    * 4. 查詢 Vault 資產合約地址（支援多鏈）
    * =============================================== */
   export async function getVaultAssetAddress(

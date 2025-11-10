@@ -1,23 +1,9 @@
 @import "tailwindcss";
 
-/* -------- 根變數設定（淺色友善） -------- */
 :root {
-  /* 淺色背景 */
-  --background: #ffffff;        /* 純白背景 */
-  --foreground: #1f2937;        /* 深灰文字 */
-
-  /* 主色調（高對比度） */
-  --primary: #0066cc;           /* 深藍 */
-  --success: #059669;           /* 深綠 */
-  --warning: #d97706;           /* 深琥珀 */
-  --error: #dc2626;             /* 深紅 */
-  --muted: #6b7280;             /* 灰色文字 */
-
-  /* 邊框和背景 */
-  --border: #e5e7eb;            /* 淺灰邊框 */
-  --card-bg: #f9fafb;           /* 卡片淺灰背景 */
-  --hover-bg: #f3f4f6;          /* hover 背景 */
-
+  --background: #f9fafb;
+  --foreground: #111827;
+  
   @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -26,177 +12,86 @@
   }
 }
 
-/* -------- 全域樣式（淺色模式） -------- */
-html,
-body {
+html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
-  letter-spacing: 0.3px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-/* -------- 標題（深色文字） -------- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #111827;               /* 非常深的灰黑 */
-  font-weight: 600;
-  margin-bottom: 0.5em;
+h1 {
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #111827;
 }
 
-/* -------- 連結（主色藍） -------- */
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1f2937;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #374151;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
 a {
-  color: var(--primary);
-  text-decoration: underline;
-  transition: opacity 0.2s;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 1.05rem;
 }
 
 a:hover {
-  opacity: 0.7;
-  text-decoration: underline wavy;
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
-a:focus {
-  outline: 3px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* -------- 按鈕基礎樣式 -------- */
 button {
-  border-radius: 8px;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  border: none;
-  min-width: 44px;
-  min-height: 44px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button:focus {
-  outline: 3px solid var(--primary);
-  outline-offset: 2px;
+  font-size: 1.05rem;
 }
 
 button:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
-/* -------- 輸入框 -------- */
-input,
-textarea,
-select {
-  background: #ffffff;
-  color: var(--foreground);
-  border: 2px solid var(--border);
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+input, textarea {
+  font-size: 1.05rem;
 }
 
-input:hover,
-textarea:hover,
-select:hover {
-  border-color: #d1d5db;
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: var(--primary);
+input:focus, textarea:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-input::placeholder {
-  color: var(--muted);
-  opacity: 0.7;
+input, textarea, select {
+  font-size: 16px;
+  transition: border-color 0.2s;
 }
 
-/* -------- 卡片容器 -------- */
-.card,
-div[class*="bg-white"],
-div[class*="shadow"] {
-  background: #ffffff !important;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-/* -------- 訊息框（警告、錯誤等） -------- */
-.alert,
-div[class*="bg-yellow"],
-div[class*="bg-red"],
-div[class*="bg-green"],
-div[class*="bg-blue"] {
-  border-left: 4px solid;
-  padding: 16px;
-  border-radius: 6px;
-  margin-bottom: 1em;
-  background-color: #f9fafb;
-}
-
-.alert-warning,
-div[class*="bg-yellow"] {
-  background: #fffbeb !important;
-  border-left-color: var(--warning);
-  color: #92400e;
-}
-
-.alert-error,
-div[class*="bg-red"] {
-  background: #fef2f2 !important;
-  border-left-color: var(--error);
-  color: #991b1b;
-}
-
-.alert-success,
-div[class*="bg-green"] {
-  background: #f0fdf4 !important;
-  border-left-color: var(--success);
-  color: #15803d;
-}
-
-.alert-info,
-div[class*="bg-blue"] {
-  background: #eff6ff !important;
-  border-left-color: var(--primary);
-  color: #1e40af;
-}
-
-/* -------- 灰色文字調整 -------- */
-.text-gray-500,
-.text-gray-600 {
-  color: #6b7280 !important;
-}
-
-.text-gray-50,
-.text-gray-100 {
-  color: #f3f4f6 !important;
-}
-
-/* -------- 減少動畫 -------- */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
