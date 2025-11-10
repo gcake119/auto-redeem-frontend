@@ -102,18 +102,19 @@ export async function getVaultAssetAddress(
 ): Promise<`0x${string}`> {
   const publicClient = createPublicClient({ transport: http(rpcUrl) });
   const result = await publicClient.readContract({
-    address: vaultAddress,
-    abi: [
-      {
-        name: 'asset',
-        type: 'function',
-        stateMutability: 'view',
-        inputs: [],
-        outputs: [{ type: 'address' }],
-      },
-    ] as const,
-    functionName: 'asset',
-    args: [],
+      address: vaultAddress,
+      abi: [
+          {
+              name: 'asset',
+              type: 'function',
+              stateMutability: 'view',
+              inputs: [],
+              outputs: [{ type: 'address' }],
+          },
+      ] as const,
+      functionName: 'asset',
+      args: [],
+      authorizationList: undefined
   });
 
   if (typeof result !== 'string' || !result.startsWith('0x')) {
@@ -130,18 +131,19 @@ export async function queryMaxRedeem(
 ): Promise<bigint> {
   const publicClient = createPublicClient({ transport: http(rpcUrl) });
   const result = await publicClient.readContract({
-    address: vaultAddress,
-    abi: [
-      {
-        name: 'maxRedeem',
-        type: 'function',
-        stateMutability: 'view',
-        inputs: [{ name: 'owner', type: 'address' }],
-        outputs: [{ type: 'uint256' }],
-      },
-    ] as const,
-    functionName: 'maxRedeem',
-    args: [tempAddress],
+      address: vaultAddress,
+      abi: [
+          {
+              name: 'maxRedeem',
+              type: 'function',
+              stateMutability: 'view',
+              inputs: [{ name: 'owner', type: 'address' }],
+              outputs: [{ type: 'uint256' }],
+          },
+      ] as const,
+      functionName: 'maxRedeem',
+      args: [tempAddress],
+      authorizationList: undefined
   });
 
   if (typeof result !== 'bigint') {
