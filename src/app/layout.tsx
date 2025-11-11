@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Providers } from './providers';
 import './globals.css';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Auto Redeem 救援工具',
@@ -25,6 +26,7 @@ export default function RootLayout({
             <main className="flex-1 w-full flex justify-center">{children}</main>
           </div>
         </Providers>
+        <Footer />
       </body>
     </html>
   );

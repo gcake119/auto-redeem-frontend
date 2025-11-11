@@ -51,4 +51,25 @@ npm run start
 
 ---
 
+**Major security and user experience improvements were contributed by [@BrianHuang813](https://github.com/BrianHuang813) in [PR #1](https://github.com/gcake119/auto-redeem-frontend/pull/1).**
+
+---
+
+## Support This Project
+
+If you find this tool helpful or want to support my work, consider contributing:
+
+- Crypto donate（Web3）：[https://gcake119.fkey.id/](https://gcake119.fkey.id/)
+- Credit card/ Line Pay：[https://open.firstory.me/join/wwhowbuhow/tier/01925f48-ec8c-449e-74f2-b5ee9380e637](https://open.firstory.me/join/wwhowbuhow/tier/01925f48-ec8c-449e-74f2-b5ee9380e637)
+
+### Cold Wallet / Hardware Wallet Affiliate Links
+
+- Ledger: [https://shop.ledger.com/?referral_code=3CMHJHEX8RYN9](https://shop.ledger.com/?referral_code=3CMHJHEX8RYN9)
+- Trezor: [https://affil.trezor.io/SHh5](https://affil.trezor.io/SHh5)
+- CoolWallet: [https://www.coolwallet.io/product/coolwallet-pro/?ref=zta0ymf](https://www.coolwallet.io/product/coolwallet-pro/?ref=zta0ymf)
+
+Thank you for supporting independent Web3 research!
+
+---
+
 MIT License.
