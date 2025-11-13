@@ -1,6 +1,7 @@
 # Auto Redeem Rescue Web Dashboard
 
-**Live Demo:** [https://auto-redeem.zeabur.app](https://auto-redeem.zeabur.app/)
+**Live Demo (zh-TW):** [https://auto-redeem.zeabur.app](https://auto-redeem.zeabur.app/)
+**English Version Live Demo:** [https://onesavielabs.github.io/auto-redeem/](https://onesavielabs.github.io/auto-redeem/) by [Rick(@ricklindev) from SavieLabs](https://github.com/ricklindev)
 
 A streamlined rescue dashboard for ERC-4626 vaults. **Use only with temporary wallets and small funds!**
 
@@ -64,7 +65,7 @@ If you find this tool helpful or want to support my work, consider contributing:
 
 ### Cold Wallet / Hardware Wallet Affiliate Links
 
-- Ledger: [https://shop.ledger.com/?referral_code=3CMHJHEX8RYN9](https://shop.ledger.com/?referral_code=3CMHJHEX8RYN9)
+- Ledger: [https://shop.ledger.com/pages/referral-program?referral_code=NNS6VK4T6YRFP](https://shop.ledger.com/pages/referral-program?referral_code=NNS6VK4T6YRFP)
 - Trezor: [https://affil.trezor.io/SHh5](https://affil.trezor.io/SHh5)
 - CoolWallet: [https://www.coolwallet.io/product/coolwallet-pro/?ref=zta0ymf](https://www.coolwallet.io/product/coolwallet-pro/?ref=zta0ymf)
 
