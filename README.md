@@ -1,7 +1,7 @@
 # Auto Redeem Rescue Web Dashboard
 
-**Live Demo (zh-TW):** [https://auto-redeem.zeabur.app](https://auto-redeem.zeabur.app/)
-**English Version Live Demo:** [https://onesavielabs.github.io/auto-redeem/](https://onesavielabs.github.io/auto-redeem/) by [Rick(@ricklindev) from SavieLabs](https://github.com/ricklindev)
+**Live Demo (zh-TW):** [https://auto-redeem.zeabur.app](https://auto-redeem.zeabur.app/).
+**English Version Live Demo:** [https://onesavielabs.github.io/auto-redeem/](https://onesavielabs.github.io/auto-redeem/) by [Rick(@ricklindev) from SavieLabs](https://github.com/ricklindev).
 
 A streamlined rescue dashboard for ERC-4626 vaults. **Use only with temporary wallets and small funds!**
 
